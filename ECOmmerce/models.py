@@ -52,3 +52,7 @@ class Categoria(models.Model):
     class Meta:
         ordering = ['nomeCategoria']
 
+class Pedido(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    produtos = models.ManyToOneRel(Produto)
+    cliente = models.OneToOneField()
