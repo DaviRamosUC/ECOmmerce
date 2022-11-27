@@ -8,5 +8,6 @@ function fecharFormulario(params) {
 }
 
 function cancelar(params) {
+  console.log("oi")
   params.closest("#alert").setAttribute("style", "display: none;")
 }

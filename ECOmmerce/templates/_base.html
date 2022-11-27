@@ -1,0 +1,29 @@
+<!-- templates/_base.html -->
+
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-gray-50">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="{% static '/js/script.js' %}" type="text/javascript"></script>
+  <title>ECOmmerce</title>
+
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'src/output.css' %}">
+  {% endcompress %}
+
+</head>
+
+<body class="h-full">
+  <div>
+    {% block content %}
+    {% endblock content %}
+  </div>
+</body>
+
+</html>
