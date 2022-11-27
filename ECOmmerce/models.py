@@ -54,5 +54,5 @@ class Categoria(models.Model):
 
 class Pedido(models.Model):
     id = models.BigAutoField(primary_key=True)
-    produtos = models.ManyToOneRel(Produto)
-    cliente = models.OneToOneField()
+    produtos = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='pedidos')
+    cliente = models.OneToOneField(Usuario, on_delete=models.CASCADE)
