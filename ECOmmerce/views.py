@@ -46,3 +46,7 @@ def cadastrar(request):
         usuario.endereco = endereco
         usuario.save()
         redirect(produtos)
+
+def detalhesProduto(request, id):
+    produto = Produto.objects.get(id=id)
+    return render(request, 'detalheProduto.html', {'produto': produto})

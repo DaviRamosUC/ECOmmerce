@@ -32,6 +32,8 @@ class Usuario(models.Model):
 class Produto(models.Model):
     id = models.BigAutoField(primary_key=True)
     nomeProduto = models.CharField(max_length=50, help_text='Nome do produto')
+    descricao = models.CharField(max_length=300, help_text='Descrição do produto')
+    subdescricao = models.CharField(max_length=30, help_text='Subdescrição do produto')
     preco = models.FloatField()
     imagem = models.CharField(max_length=180, help_text='Imagem do produto')
 
