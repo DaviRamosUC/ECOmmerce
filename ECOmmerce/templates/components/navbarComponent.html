@@ -17,16 +17,16 @@
         </button>
       </div>
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex flex-shrink-0 items-center">
+        <a class="flex flex-shrink-0 items-center" href="{% url 'home'%}">
           <img class="block h-8 w-auto lg:hidden"
             src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_960_720.png" alt="Logo Eco">
           <img class="hidden h-8 w-auto lg:block"
             src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_960_720.png" alt="Logo Eco">
-        </div>
+        </a>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-              aria-current="page">Categorias</a>
+            <a href="{% url 'produtos'%}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+              aria-current="page">Produtos</a>
 
             <a href="#"
               class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ofertas

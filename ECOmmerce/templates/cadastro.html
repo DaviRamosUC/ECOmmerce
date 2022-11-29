@@ -7,7 +7,7 @@
         alt="ECOmmerce Logo">
       <h2 class="mt-6 text-center text-2xl font-bold tracking-tight text-gray-900">Olá! Seja bem vindo ao ECOmmerce
     </div>
-    <form class="mt-8 space-y-6" method="POST">
+    <form class="mt-8 space-y-6" method="POST" action="{% url 'cadastrar' %}">
       {% csrf_token %}
       <input type="hidden" name="remember" value="true">
       <div class="-space-y-px rounded-md shadow-sm">
@@ -30,10 +30,52 @@
             placeholder="Número de celular">
         </div>
         <div class="mt-8 space-y-6">
-          <label for="email-address" class="sr-only">Telefone, e-mail ou usuário</label>
+          <label for="cep" class="sr-only">CEP</label>
+          <input id="cep" name="cep" type="text" autocomplete="cep" required onfocusout="searchAddress(this)"
+            class="relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="CEP">
+        </div>
+        <div class="mt-8 space-y-6">
+          <label for="rua" class="sr-only">Rua</label>
+          <input id="rua" name="rua" type="text" autocomplete="rua" required
+            class="relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Rua">
+        </div>
+        <div class="mt-8 space-y-6">
+          <label for="numero" class="sr-only">Numero</label>
+          <input id="numero" name="numero" type="text" autocomplete="numero" required
+            class="relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Número">
+        </div>
+        <div class="mt-8 space-y-6">
+          <label for="complemento" class="sr-only">Complemento</label>
+          <input id="complemento" name="complemento" type="text" autocomplete="complemento" required
+            class="relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Complemento">
+        </div>
+        <div class="mt-8 space-y-6">
+          <label for="bairro" class="sr-only">Bairro</label>
+          <input id="bairro" name="bairro" type="text" autocomplete="bairro" required
+            class="relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Bairro">
+        </div>
+        <div class="mt-8 space-y-6">
+          <label for="cidade" class="sr-only">Cidade</label>
+          <input id="cidade" name="cidade" type="text" autocomplete="cidade" required
+            class="relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Cidade">
+        </div>
+        <div class="mt-8 space-y-6">
+          <label for="estado" class="sr-only">Estado</label>
+          <input id="estado" name="estado" type="text" autocomplete="estado" required
+            class="relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Estado">
+        </div>
+        <div class="mt-8 space-y-6">
+          <label for="email-address" class="sr-only">E-mail</label>
           <input id="email-address" name="email" type="email" autocomplete="email" required
             class="relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            placeholder="Telefone, e-mail ou usuário">
+            placeholder="E-mail">
         </div>
         <div class="mt-8 space-y-6">
           <label for="password" class="sr-only">Senha</label>
@@ -72,4 +114,32 @@
     </form>
   </div>
 </div>
+<script>
+  function searchAddress(self) {
+    let cep = event.target.value
+    if (cep) {
+      fetch(`https://cep.awesomeapi.com.br/json/${cep}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+      }).then(response => response.text()).then(text => {
+        let result = JSON.parse(text)
+        console.log(result)
+        let rua = document.querySelector('#rua')
+        let cidade = document.querySelector('#cidade')
+        let bairro = document.querySelector('#bairro')
+        let estado = document.querySelector('#estado')
+        rua.innerHTML = result.address_name
+        rua.value = result.address_name
+        cidade.innerHTML = result.address_name
+        cidade.value = result.address_name
+        bairro.innerHTML = result.district
+        bairro.value = result.district
+        estado.innerHTML = result.state
+        estado.value = result.state
+      })
+    }
+  }
+</script>
 {% endblock content %}
